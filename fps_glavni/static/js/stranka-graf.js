@@ -12,7 +12,7 @@ function pieGraph(data, container){
     var container = (container)? container : containerFake;
 
     var chart = c3.generate({
-    bindto: containerFake,
+    bindto: container,
     data: {
         columns: data,
         type : 'pie',

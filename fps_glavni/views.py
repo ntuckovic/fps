@@ -43,8 +43,11 @@ class PartyView(TemplateView):
         context['party'] = party
         years = set(amounts.values_list('year', flat=True))
         pies = []
+        total = []
         for year in years:
+            total.append( (year, amounts.filter(year=year).aggregate(Sum('amount')) ) )
             pies.append((year, amounts.filter(year=year)))
+        context['total'] = total
         context['pies'] = pies
 
         return context

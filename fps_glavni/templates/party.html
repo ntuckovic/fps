@@ -5,15 +5,21 @@
 {% block content %}
 	<h2 class="content-subhead">{{ party.name }} ( {{ party.short_name }} )</h2>
     <p>
-        <div id="graph-container">
-        	ovdje bi trebao biti graf, js uključen?
-        </div>
-        <br>
-        <br>
-        {% for item in parties_all %}
-        <br>
-        	{{ item }}
+
+        {% for pie in pies %}
+            <div class="graph-wrap">
+                <div class="graph-year">
+                    Godina: {{pie.0}}. <br>
+                </div>
+                <div id="graph-container-{{pie.0}}">
+                    ovdje bi trebao biti graf, js uključen?
+                </div>
+            </div>
         {% endfor %}
+        {#% for value in total %#}
+            {#{ value.1.amount__sum }#}
+        {#% endfor %#}
+
     </p>
 {% endblock %}
 
@@ -33,7 +39,7 @@
     <script type="text/javascript">
     $(document).ready(function(){
         {% for pie in pies %}
-            pieGraph(data_{{pie.0}});
+            pieGraph(data_{{pie.0}}, "#graph-container-{{pie.0}}");
         {% endfor %}
     });
     </script>

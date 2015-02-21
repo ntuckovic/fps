@@ -19,3 +19,14 @@
 .divider{
 	list-style: none;
 }
+
+.graph-wrap{
+	margin-bottom: 40px;
+}
+
+.graph-year{
+	font-size: 16px;
+	font-weight: 600;
+	position: relative;
+	top: 35px;
+}
