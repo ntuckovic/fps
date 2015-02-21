@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.core.urlresolvers import reverse
 from django.db import models
 
 class PoliticalParty(models.Model):
@@ -12,6 +13,9 @@ class PoliticalParty(models.Model):
     class Meta:
         verbose_name = u"Politička stranka"
         verbose_name_plural = u"Političke stranke"
+
+    def get_absolute_url(self):
+        return reverse('url_glavni:fps_party', kwargs={'slug': self.slug})
 
 # INCOME_TYPES = (
 #     (1, u'Prihodi iz državnog proračuna'),
@@ -33,7 +37,7 @@ class Income(models.Model):
         verbose_name_plural = u"Prihodi"
 
 class Amount(models.Model):
-    party = models.ForeignKey(PoliticalParty, verbose_name=u"Politička stranka")
+    party = models.ForeignKey(PoliticalParty, verbose_name=u"Politička stranka", related_name='amounts')
     income = models.ForeignKey(Income, verbose_name=u"Prihod")
     amount = models.DecimalField(verbose_name=u"Iznos", decimal_places=2, max_digits=20, default=0)
     year = models.SmallIntegerField(verbose_name=u"Godina")

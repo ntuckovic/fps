@@ -1,19 +1,31 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render, render_to_response
+from django.db.models import Sum
 from django.views.generic import TemplateView
 from django.template import RequestContext, loader
 from django.http import HttpResponse
+from .models import PoliticalParty, Amount
+from datetime import datetime
+
+from django.shortcuts import get_object_or_404
+import settings
 
 class IndexView(TemplateView):
     template_name = "index.html"
 
-    def get(self, request, *args, **kwargs):
-
-        context = {}
-
-        context["projekt"] = "FPS - HR"
-        context["desc"] = u"Prikaz financiranja političkih stranaka u RH"
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data()
+        context["projekt"] = settings.PROJECT_NAME
+        context["desc"] = settings.PROJECT_DESCRIPTION
         context["ctx"] = u"Početna"
 
-        return render_to_response(self.template_name, context, context_instance=RequestContext(request, context))
+        year = 2012 # datetime.now().year
+        parties = PoliticalParty.objects.filter(amounts__year=2012).annotate(total=Sum('amounts__amount'))
+        context['parties'] = parties
+
+        return context
+
+
+class PartyView(TemplateView):
+    template_name = "party.html"
