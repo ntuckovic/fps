@@ -7,4 +7,6 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^fps_glavni/', include('fps_glavni.urls', namespace='url_glavni',
+                                 app_name='url_glavni')),
 )
