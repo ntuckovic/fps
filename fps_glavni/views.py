@@ -39,8 +39,12 @@ class PartyView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(PartyView, self).get_context_data()
         party = get_object_or_404(PoliticalParty, slug=self.party_slug)
-        amounts = party.amounts.select_related('income').order_by('year')
+        amounts = party.amounts.select_related('income')
         context['party'] = party
-        context['amounts'] = amounts
+        years = set(amounts.values_list('year', flat=True))
+        pies = []
+        for year in years:
+            pies.append((year, amounts.filter(year=year)))
+        context['pies'] = pies
 
         return context

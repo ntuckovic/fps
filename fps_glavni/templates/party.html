@@ -19,11 +19,22 @@
 
 
 {% block bottom-script %}
+    <script>
+        {% for pie in pies %}
+            var data_{{pie.0}} = [
+                {% for amount in pie.1 %}
+                    ['{{ amount.income.name }}', {{ amount.amount }}],
+                {% endfor %}
+            ]
+        {% endfor %}
+    </script>
 	<script src="{% static 'js/stranka-graf.js' %}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
-        pieGraph("");
+        {% for pie in pies %}
+            pieGraph(data_{{pie.0}});
+        {% endfor %}
     });
     </script>
 {% endblock %}
