@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from django.shortcuts import render, render_to_response
+from django.core import serializers
 from django.db.models import Sum
 from django.views.generic import TemplateView
-from django.template import RequestContext, loader
-from django.http import HttpResponse
-from .models import PoliticalParty, Amount
+from .models import PoliticalParty, Amount, Income
 from datetime import datetime
 
 from django.shortcuts import get_object_or_404
@@ -51,3 +49,15 @@ class PartyView(TemplateView):
 
 class ImpressumView(TemplateView):
     template_name = "impressum.html"
+
+
+class JsonDbDump(TemplateView):
+    template_name = "json_dump.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(JsonDbDump, self).get_context_data()
+        all_objects = list(PoliticalParty.objects.all()) + list(Amount.objects.all()) + list(Income.objects.all())
+        data = serializers.serialize('json', all_objects)
+        context['data'] = data
+        return context
+
