@@ -8,6 +8,12 @@
         <div id="graph-container">
         	ovdje bi trebao biti graf, js uključen?
         </div>
+        <br>
+        <br>
+        {% for k, v in parties.iteritems %}
+        	<br>
+        	{{ k }}, {{ v|safe }}
+        {% endfor %}
     </p>
 {% endblock %}
 

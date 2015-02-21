@@ -16,12 +16,21 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data()
-        context["projekt"] = settings.PROJECT_NAME
+        context["projekt"] = settings.PROJECT_NAME 
         context["desc"] = settings.PROJECT_DESCRIPTION
         context["ctx"] = u"Početna"
 
         year = 2012 # datetime.now().year
-        parties = PoliticalParty.objects.filter(amounts__year=2012).annotate(total=Sum('amounts__amount'))
+        parties = PoliticalParty.objects.filter(amounts__year=year).annotate(total=Sum('amounts__amount'))
+        x_field = ["x", ]
+        data_field = ["total_income", ]
+
+        for item in parties:
+            x_field.append(item.short_name)
+            data_field.append(item.total)
+
+        parties = { "x":x_field, "data":data_field }
+
         context['parties'] = parties
 
         return context
