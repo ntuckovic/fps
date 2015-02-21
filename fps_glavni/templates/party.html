@@ -2,6 +2,8 @@
 
 {% load staticfiles %}
 
+{% block title %}{{ party.short_name }}{% endblock %}
+
 {% block content %}
 	<h2 class="content-subhead">{{ party.name }} ( {{ party.short_name }} )</h2>
     <p>
