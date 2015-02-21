@@ -21,8 +21,10 @@ class IndexView(TemplateView):
         context["ctx"] = u"Početna"
 
         year = 2012 # datetime.now().year
+        parties_all = PoliticalParty.objects.all()
         parties = PoliticalParty.objects.filter(amounts__year=year).annotate(total=Sum('amounts__amount'))
 
+        context['parties_all'] = parties_all
         context['parties'] = parties
 
         return context
@@ -31,14 +33,17 @@ class IndexView(TemplateView):
 class PartyView(TemplateView):
     template_name = "party.html"
 
+
     def dispatch(self, request, *args, **kwargs):
         self.party_slug = kwargs.get('slug', None)
         return super(PartyView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
+        parties_all = PoliticalParty.objects.all()
         context = super(PartyView, self).get_context_data()
         party = get_object_or_404(PoliticalParty, slug=self.party_slug)
         amounts = party.amounts.select_related('income').order_by('year')
         context['amounts'] = amounts
+        context['parties_all'] = parties_all
 
         return context
