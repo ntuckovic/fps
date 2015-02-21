@@ -41,10 +41,15 @@ class IndexView(TemplateView):
 class PartyView(TemplateView):
     template_name = "party.html"
 
+
+    def dispatch(self, request, *args, **kwargs):
+        self.party_slug = kwargs.get('slug', None)
+        return super(PartyView, self).dispatch(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context = super(PartyView, self).get_context_data()
-        parties_all = PoliticalParty.objects.all()
-
-        context['parties_all'] = parties_all
+        party = get_object_or_404(PoliticalParty, slug=self.party_slug)
+        amounts = party.amounts.select_related('income').order_by('year')
+        context['amounts'] = amounts
 
         return context
