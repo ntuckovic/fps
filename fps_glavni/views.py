@@ -44,3 +44,6 @@ class PartyView(TemplateView):
         context['amounts'] = amounts
 
         return context
+
+class ImpressumView(TemplateView):
+    template_name = "impressum.html"
