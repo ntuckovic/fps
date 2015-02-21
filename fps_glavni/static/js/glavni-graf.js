@@ -5,7 +5,10 @@ var chart = c3.generate({
     data: {
     	x: "x",
         columns: party_columns,
-        type: 'bar'
+        type: 'bar',
+        names: {
+            data1: 'Ukupni godišnji prihod',
+        }
     },
     axis: {
         x: {
