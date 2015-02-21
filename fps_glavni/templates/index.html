@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 
-{% block head-script %}
-	<script src="{% static 'js/glavni-graf.js' %}"></script>
-{% endblock %}
+{% load staticfiles %}
 
 {% block content %}
 	<h2 class="content-subhead">Ukupan omjer sredstava</h2>
@@ -11,4 +9,9 @@
         	ovdje bi trebao biti graf, js uključen?
         </div>
     </p>
+{% endblock %}
+
+
+{% block bottom-script %}
+	<script src="{% static 'js/glavni-graf.js' %}"></script>
 {% endblock %}

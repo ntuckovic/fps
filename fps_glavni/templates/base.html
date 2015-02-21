@@ -24,7 +24,7 @@
 			<link href="{% static 'deps/c3/c3.min.css' %}" rel="stylesheet" type="text/css">
 			<!-- Load d3.js and c3.js -->
 			<script src="{% static 'deps/c3/d3.min.js' %}" charset="utf-8"></script>
-			<script src="{% static 'deps/c3/c3.min.js' %}"></script>
+			g<script src="{% static 'deps/c3/c3.min.js' %}"></script>
 	    {% endblock %}
 	    {% block head-script %}
 
@@ -71,7 +71,13 @@
 			        </div>
 			    </div>
 			</div>
+			<div id="scritps">
+				{% block bottom-script%}
+
+				{% endblock %}
+			</div>
 		{% endblock %}
+		
 
 	</body>
 
