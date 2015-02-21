@@ -21,6 +21,7 @@ class IndexView(TemplateView):
         context["ctx"] = u"Početna"
 
         year = 2012 # datetime.now().year
+        parties_all = PoliticalParty.objects.all()
         parties = PoliticalParty.objects.filter(amounts__year=year).annotate(total=Sum('amounts__amount'))
         x_field = ["x", ]
         data_field = ["total_income", ]
@@ -31,6 +32,7 @@ class IndexView(TemplateView):
 
         parties = { "x":x_field, "data":data_field }
 
+        context['parties_all'] = parties_all
         context['parties'] = parties
 
         return context
@@ -38,3 +40,11 @@ class IndexView(TemplateView):
 
 class PartyView(TemplateView):
     template_name = "party.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(PartyView, self).get_context_data()
+        parties_all = PoliticalParty.objects.all()
+
+        context['parties_all'] = parties_all
+
+        return context
