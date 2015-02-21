@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 
-{% block main-container %}
-	{{ block.super }}
+{% block head-script %}
+	<script src="{% static 'js/glavni-graf.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+	<h2 class="content-subhead">Ukupan omjer sredstava</h2>
+    <p>
+        <div id="graph-container">
+        	ovdje bi trebao biti graf, js uključen?
+        </div>
+    </p>
 {% endblock %}

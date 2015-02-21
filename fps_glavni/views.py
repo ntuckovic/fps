@@ -13,7 +13,7 @@ class IndexView(TemplateView):
         context = {}
 
         context["projekt"] = "FPS - HR"
-        context["desc"] = "Prikaz financiranja političkih stranaka u RH"
-        context["ctx"] = "Početna"
+        context["desc"] = u"Prikaz financiranja političkih stranaka u RH"
+        context["ctx"] = u"Početna"
 
         return render_to_response(self.template_name, context, context_instance=RequestContext(request, context))

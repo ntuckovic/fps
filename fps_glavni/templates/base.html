@@ -1,7 +1,7 @@
 {% load staticfiles %}
 
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="hr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +18,17 @@
 	    <!--[if gt IE 8]><!-->
 	        <link rel="stylesheet" href="{% static 'css/1.17.30_side_menu.css' %}">
 	    <!--<![endif]-->
+
+	    {% block sources %}
+	    	<!-- Load c3.css -->
+			<link href="{% static 'deps/c3/c3.min.css' %}" rel="stylesheet" type="text/css">
+			<!-- Load d3.js and c3.js -->
+			<script src="{% static 'deps/c3/d3.min.js' %}" charset="utf-8"></script>
+			<script src="{% static 'deps/c3/c3.min.js' %}"></script>
+	    {% endblock %}
+	    {% block head-script %}
+
+	    {% endblock %}
 	</head>
 	<body>
 
@@ -36,14 +47,13 @@
 			            </a>
 
 			            <ul>
-			                <li><a href="./Side Menu – Layout Examples – Pure_files/Side Menu – Layout Examples – Pure.html">Home</a></li>
-			                <li><a href="./Side Menu – Layout Examples – Pure_files/Side Menu – Layout Examples – Pure.html">About</a></li>
-
-			                <li class="menu-item-divided pure-menu-selected">
-			                    <a href="./Side Menu – Layout Examples – Pure_files/Side Menu – Layout Examples – Pure.html">Services</a>
+			            	{% block linkovi %}
+			                <li class="menu-item-divided {% if ctx == 'Početna' %}pure-menu-selected{% endif %}">
+			                	<a href="{% url 'url_glavni:fps_index' %}">
+			                		Početna
+			                	</a>
 			                </li>
-
-			                <li><a href="./Side Menu – Layout Examples – Pure_files/Side Menu – Layout Examples – Pure.html">Contact</a></li>
+			                {% endblock %}
 			            </ul>
 			        </div>
 			    </div>
@@ -55,35 +65,9 @@
 			        </div>
 
 			        <div class="content">
-			            <h2 class="content-subhead">How to use this layout</h2>
-			            <p>
-			                To use this layout, you can just copy paste the HTML, along with the CSS in <a href="http://purecss.io/css/layouts/side-menu.css" alt="Side Menu CSS">side-menu.css</a>, and the JavaScript in <a href="http://purecss.io/js/ui.js">ui.js</a>. The JS file uses vanilla JavaScript to simply toggle an <code>active</code> class that makes the menu responsive.
-			            </p>
+			            {% block content %}
 
-			            <h2 class="content-subhead">Now Let's Speak Some Latin</h2>
-			            <p>
-			                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-			            </p>
-
-			            <div class="pure-g">
-			                <div class="pure-u-1-4">
-			                    <img class="pure-img-responsive" src="./Side Menu – Layout Examples – Pure_files/9069037713_1752f5daeb.jpg" alt="Peyto Lake">
-			                </div>
-			                <div class="pure-u-1-4">
-			                    <img class="pure-img-responsive" src="./Side Menu – Layout Examples – Pure_files/9069585985_80da8db54f.jpg" alt="Train">
-			                </div>
-			                <div class="pure-u-1-4">
-			                    <img class="pure-img-responsive" src="./Side Menu – Layout Examples – Pure_files/9121446012_c1640e42d0.jpg" alt="T-Shirt Store">
-			                </div>
-			                <div class="pure-u-1-4">
-			                    <img class="pure-img-responsive" src="./Side Menu – Layout Examples – Pure_files/9086701425_fda3024927.jpg" alt="Mountain">
-			                </div>
-			            </div>
-
-			            <h2 class="content-subhead">Try Resizing your Browser</h2>
-			            <p>
-			                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-			            </p>
+			            {% endblock %}
 			        </div>
 			    </div>
 			</div>
