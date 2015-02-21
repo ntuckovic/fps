@@ -10,10 +10,6 @@
         </div>
         <br>
         <br>
-        {% for k, v in parties.iteritems %}
-        	<br>
-        	{{ k }}, {{ v|safe }}
-        {% endfor %}
         <br>
         <br>
         {% for item in parties_all %}
@@ -28,7 +24,7 @@
     <script>
         var party_columns = [
         	["x", {% for party in parties %}"{{ party.short_name }}",{% endfor %}],
-            ['data1', {% for party in parties %}{{ party.total }}, {% endfor %}],
+            ['data1', {% for party in parties %}parseInt({{ party.total }}), {% endfor %}],
         ];
     </script>
 	<script src="{% static 'js/glavni-graf.js' %}"></script>

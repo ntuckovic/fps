@@ -10,7 +10,7 @@
 
     <meta name="description" content="{{ desc }}">
 
-    <title>{{ projekt }} - {{ ctx }}</title>
+    <title>{% block title %}{{ projekt }} - {{ ctx }}{% endblock %}</title>
 	
 	<head>
 		<link rel="stylesheet" type="text/css" href="{% static 'css/pure-min.css' %}">
