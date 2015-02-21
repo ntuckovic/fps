@@ -1,0 +1,25 @@
+<div id="menu">
+<div class="pure-menu pure-menu-open">
+    <a class="pure-menu-heading" href="{% url 'url_glavni:fps_index' %}">
+        {{ projekt }}
+    </a>
+
+    <ul>
+        <li class="menu-item-divided {% if ctx == 'Početna' %}pure-menu-selected{% endif %}">
+            <a href="{% url 'url_glavni:fps_index' %}">
+                Početna
+            </a>
+        </li>
+        <li class="menu-item-divided" id="party_divider">
+            Stranke:
+        </li>
+        {% for party in parties_all %}
+            <li class="menu-item-divided">
+                <a href="{{ party.get_absolute_url }}">
+                    {{ party.short_name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+</div>

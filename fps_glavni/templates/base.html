@@ -1,4 +1,6 @@
 {% load staticfiles %}
+{% load tags %}
+
 
 <!DOCTYPE html>
 <html lang="hr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -43,33 +45,34 @@
 			        <span></span>
 			    </a>
 
-			    <div id="menu">
-			        <div class="pure-menu pure-menu-open">
-			            <a class="pure-menu-heading" href="{% url 'url_glavni:fps_index' %}">
-			            	{{ projekt }}
-			            </a>
+                {% main_navigation %}
+			    <!--<div id="menu">-->
+			        <!--<div class="pure-menu pure-menu-open">-->
+			            <!--<a class="pure-menu-heading" href="{% url 'url_glavni:fps_index' %}">-->
+			            	<!--{{ projekt }}-->
+			            <!--</a>-->
 
-			            <ul>
-			            	{% block linkovi %}
-				                <li class="menu-item-divided {% if ctx == 'Početna' %}pure-menu-selected{% endif %}">
-				                	<a href="{% url 'url_glavni:fps_index' %}">
-				                		Početna
-				                	</a>
-				                </li>
-				                <li class="menu-item-divided" id="party_divider">
-				                	Stranke:
-				                </li>
-			                	{% for party in parties_all %}
-				                	<li class="menu-item-divided">
-					                	<a href="#">
-					                		{{ party }}
-					                	</a>
-					                </li>
-			                	{% endfor %}
-			                {% endblock %}
-			            </ul>
-			        </div>
-			    </div>
+			            <!--<ul>-->
+			            	<!--{% block linkovi %}-->
+				                <!--<li class="menu-item-divided {% if ctx == 'Početna' %}pure-menu-selected{% endif %}">-->
+				                	<!--<a href="{% url 'url_glavni:fps_index' %}">-->
+				                		<!--Početna-->
+				                	<!--</a>-->
+				                <!--</li>-->
+				                <!--<li class="menu-item-divided" id="party_divider">-->
+				                	<!--Stranke:-->
+				                <!--</li>-->
+			                	<!--{% for party in parties_all %}-->
+				                	<!--<li class="menu-item-divided">-->
+					                	<!--<a href="#">-->
+					                		<!--{{ party. }}-->
+					                	<!--</a>-->
+					                <!--</li>-->
+			                	<!--{% endfor %}-->
+			                <!--{% endblock %}-->
+			            <!--</ul>-->
+			        <!--</div>-->
+			    <!--</div>-->
 
 			    <div id="main">
 			        <div class="header">
