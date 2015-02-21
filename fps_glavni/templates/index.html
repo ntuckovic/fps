@@ -19,5 +19,11 @@
 
 
 {% block bottom-script %}
+    <script>
+        var party_columns = [
+        	["x", {% for party in parties %}"{{ party.short_name }}",{% endfor %}],
+            ['data1', {% for party in parties %}{{ party.total }}, {% endfor %}],
+        ];
+    </script>
 	<script src="{% static 'js/glavni-graf.js' %}"></script>
 {% endblock %}
