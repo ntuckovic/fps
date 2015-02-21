@@ -48,3 +48,6 @@ class PartyView(TemplateView):
         context['pies'] = pies
 
         return context
+
+class ImpressumView(TemplateView):
+    template_name = "impressum.html"
