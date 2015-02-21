@@ -110,7 +110,7 @@ class Command(BaseCommand):
             year = 2013
             for i, x in enumerate(prihodi):
                 income = Income.objects.get(name=prihodi[i])
-                iznos = prvi_stupac[i].replace('.', '').replace(',', '.')
+                iznos = drugi_stupac[i].replace('.', '').replace(',', '.')
                 amount = Amount.objects.get_or_create(
                     party=party,
                     income=income,
