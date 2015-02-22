@@ -16,6 +16,11 @@
 	list-style: none;
 }
 
+.footer ul li{
+	display: inline-block;
+	padding: 0px 20px;
+}
+
 .divider{
 	list-style: none;
 }
