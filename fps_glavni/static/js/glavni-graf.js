@@ -17,7 +17,7 @@ var chart = c3.generate({
                 rotate: 75,
                 multiline: false
             },
-            height: 130
+            height: 30
         }
     }
 });

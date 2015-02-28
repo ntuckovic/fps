@@ -5,23 +5,37 @@
 {% block title %}{{ party.short_name }}{% endblock %}
 
 {% block content %}
+{% load humanize %}
 	<h2 class="content-subhead">{{ party.name }} ( {{ party.short_name }} )</h2>
     <p>
 
         {% for pie in pies %}
             <div class="graph-wrap">
                 <div class="graph-year">
-                    Godina: {{pie.0}}. <br>
+                    Godina: {{ pie.0 }}. <br>
                 </div>
                 <div id="graph-container-{{pie.0}}">
                     ovdje bi trebao biti graf, js uključen?
                 </div>
+                <div>
+                <table class="pure-table pure-table-bordered" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Ukupno</th>
+                            <th align="right"><strong>{{ pie.2.amount__sum|intcomma}} kn</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for a in pie.1 %}
+                    <tr><td>{{ a.income.name }}</td><td align="right">{{ a.amount|intcomma }} kn</td></tr>
+                    {% endfor %}    
+                    </tbody>
+                </table>
+                    
+                </div>
             </div>
         {% endfor %}
-        {#% for value in total %#}
-            {#{ value.1.amount__sum }#}
-        {#% endfor %#}
-
+        
     </p>
 {% endblock %}
 
@@ -37,7 +51,7 @@
         {% endfor %}
     </script>
 	<script src="{% static 'js/stranka-graf.js' %}"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
     <script type="text/javascript">
     $(document).ready(function(){
         {% for pie in pies %}

@@ -16,6 +16,7 @@ admin.site.register(Income, IncomeAdmin)
 class AmountAdmin(admin.ModelAdmin):
     list_display = ['party', 'income', 'amount', 'year']
     list_filter = ['party', 'income', 'year']
-    ordering = ['year', ]
+    list_editable = ['income', 'amount', 'year']
+    ordering = ['year', 'income']
 
 admin.site.register(Amount, AmountAdmin)

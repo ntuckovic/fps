@@ -1,9 +1,8 @@
-{% load staticfiles %}
-{% load tags %}
-
-
+{% load staticfiles %}{% load tags %}
 <!DOCTYPE html>
-<html lang="hr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="hr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +11,7 @@
 
     <title>{% block title %}{{ projekt }} - {{ ctx }}{% endblock %}</title>
 	
-	<head>
+	
 		<link rel="stylesheet" type="text/css" href="{% static 'css/pure-min.css' %}">
 		<!--[if lte IE 8]>
 	        <link rel="stylesheet" href="{% static 'css/1.17.30_ie8.css' %}">
@@ -33,7 +32,7 @@
 	    {% block head-script %}
 
 	    {% endblock %}
-	</head>
+</head>
 	<body>
 
 		{% block main-container %}
@@ -77,8 +76,39 @@
 				{% endblock %}
 			</div>
 		{% endblock %}
-		
 
+		{% block webstats %}
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-59986787-1', 'auto');
+		  ga('send', 'pageview');
+
+		</script>
+
+		<!-- Start of StatCounter Code for Default Guide -->
+		<script type="text/javascript">
+		var sc_project=10304560; 
+		var sc_invisible=1; 
+		var sc_security="6b71b4a6"; 
+		var scJsHost = (("https:" == document.location.protocol) ?
+		"https://secure." : "http://www.");
+		document.write("<sc"+"ript type='text/javascript' src='" +
+		scJsHost+
+		"statcounter.com/counter/counter.js'></"+"script>");
+		</script>
+		<noscript><div class="statcounter"><a title="shopify
+		analytics tool" href="http://statcounter.com/shopify/"
+		target="_blank"><img class="statcounter"
+		src="http://c.statcounter.com/10304560/0/6b71b4a6/1/"
+		alt="shopify analytics tool"></a></div></noscript>
+		<!-- End of StatCounter Code for Default Guide -->
+		{% endblock %}
+		
+		
 	</body>
 
 </html>

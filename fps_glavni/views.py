@@ -18,8 +18,9 @@ class IndexView(TemplateView):
         context["desc"] = settings.PROJECT_DESCRIPTION
         context["ctx"] = u"Početna"
 
-        year = 2012 # datetime.now().year
-        parties = PoliticalParty.objects.filter(amounts__year=year).annotate(total=Sum('amounts__amount'))
+        year = 2013 # datetime.now().year
+        parties = PoliticalParty.objects.filter(amounts__year=year)\
+            .order_by('name').annotate(total=Sum('amounts__amount'))
 
         context['parties'] = parties
 
@@ -37,15 +38,15 @@ class PartyView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(PartyView, self).get_context_data()
         party = get_object_or_404(PoliticalParty, slug=self.party_slug)
-        amounts = party.amounts.select_related('income')
+        amounts = party.amounts.select_related('income').order_by('income__id')
         context['party'] = party
         years = set(amounts.values_list('year', flat=True))
         pies = []
         total = []
         for year in years:
-            total.append( (year, amounts.filter(year=year).aggregate(Sum('amount')) ) )
-            pies.append((year, amounts.filter(year=year)))
-        context['total'] = total
+            #total.append((year, amounts.filter(year=year).aggregate(Sum('amount'))))
+            pies.append((year, amounts.filter(year=year), amounts.filter(year=year).aggregate(Sum('amount'))))
+        #context['total'] = total
         context['pies'] = pies
 
         return context
